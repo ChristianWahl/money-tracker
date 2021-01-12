@@ -1,0 +1,81 @@
+---
+Description: >
+  Installs an EC2 instance for Jenkins.
+
+Parameters:
+
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names
+    Type: String
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+
+  InstanceType:
+    Description: Jenkins EC2 instance type
+    Type: String
+    Default: t2.small
+
+  SSHLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    Default: 0.0.0.0/0
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType:
+        Ref: InstanceType
+      SecurityGroups:
+        - Ref: InstanceSecurityGroup
+      KeyName:
+        Ref: KeyName
+      # You might have to adapt the ImageId according to your region
+      ImageId: ami-092391a11f8aa4b7b
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-EC2"
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp:
+            Ref: SSHLocation
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '8080'
+          ToPort: '8080'
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-SecurityGroup"
+
+Outputs:
+  InstanceId:
+    Description: InstanceId of the newly created EC2 instance
+    Value:
+      Ref: EC2Instance
+    Export:
+      Name: !Sub "${EnvironmentName}-EC2-InstanceId"
+
+
+  PublicDNS:
+    Description: Public DNS name of the newly created EC2 instance
+    Value:
+      Fn::GetAtt:
+        - EC2Instance
+        - PublicDnsName
+    Export:
+      Name: !Sub "${EnvironmentName}-EC2-DNS"

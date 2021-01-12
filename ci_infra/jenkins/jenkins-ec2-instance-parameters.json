@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "EnvironmentName",
+    "ParameterValue": "Jenkins"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "YOURKEY"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t2.small"
+  },
+  {
+    "ParameterKey": "SSHLocation",
+    "ParameterValue": "YOURIP"
+  }
+]
