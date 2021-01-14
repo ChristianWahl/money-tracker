@@ -10,13 +10,16 @@ pipeline {
                 HOME = "${WORKSPACE}"
             }
             steps {
+                sh 'pwd'
                 sh 'ls -al'
                 sh 'npm install'
             }
         }
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'pwd'
+                sh 'ls -al'
+                sh 'node_modules/react-scripts/bin/react-scripts.js build'
             }
         }
     }
