@@ -13,6 +13,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'npm install'
+                sh 'npm install typescript'
             }
         }
         stage('Build') {
