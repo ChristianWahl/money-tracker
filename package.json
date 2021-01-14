@@ -42,6 +42,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.7.0",
     "react-test-renderer": "^16.6.1",
     "surge": "^0.21.6"
@@ -52,6 +53,7 @@
   },
   "scripts": {
     "pretty": "prettier --write 'src/**/*.js'",
+    "lint": "./node_modules/.bin/eslint src/",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -13,6 +13,11 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('Lint') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install typescript react-scripts'
