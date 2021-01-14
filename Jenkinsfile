@@ -11,11 +11,11 @@ pipeline {
             }
             steps {
                 sh 'npm install'
-                sh 'npm install -g typescript react-scripts'
             }
         }
         stage('Build') {
             steps {
+                sh 'npm install typescript react-scripts'
                 sh 'npm run build'
             }
         }
