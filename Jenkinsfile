@@ -19,5 +19,10 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        post {
+            always {
+                cleanWs()
+            }
+        }
     }
 }
