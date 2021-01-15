@@ -34,5 +34,13 @@ pipeline {
         always {
             cleanWs()
         }
+        success {
+            when {
+                branch 'master|release/*'
+            }
+            steps {
+                sh 'Promote!'
+            }
+        }
     }
 }
