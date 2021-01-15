@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = 'public.ecr.aws/z9p8y5e8/cwa-prod'
+        registryCredential = 'ID_OF_MY_AWS_JENKINS_CREDENTIAL'
+        dockerImage = 'moneytracker'
+    }
     agent { label 'docker' }
     stages {
         stage('Install dependencies') {
@@ -58,10 +63,11 @@ pipeline {
                 branch 'master'
             }
             steps {
-                docker.withRegistry('public.ecr.aws/z9p8y5e8/cwa-prod') {
-                    def customImage = docker.build("money-tracker:${env.BUILD_ID}")
-                    /* Push the container to the custom Registry */
-                    customImage.push()
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry('https://' + registry) {
+                        dockerImage.push()
+                    }
                 }
             }
         }
