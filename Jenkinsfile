@@ -37,7 +37,7 @@ pipeline {
         success {
             script {
                 if (env.BRANCH_NAME == 'master') {
-                    sh 'Promote!'
+                    sh 'echo Promote!'
                     currentBuild.result = 'SUCCESS'
                 }
              }
