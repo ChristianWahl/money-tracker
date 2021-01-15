@@ -80,8 +80,8 @@ pipeline {
                     sh 'aws eks --region $awsRegion update-kubeconfig --name $cluster'
                     sh '''
                         export IMAGE=$registry/$dockerImage:$BUILD_NUMBER
-                        sed -ie "s~IMAGE~$IMAGE~g" deploy/kubernetes.yml
-                        kubectl apply -f deploy/kubernetes.yml
+                        sed -ie "s~IMAGE~$IMAGE~g" kubernetes/deployment.yml
+                        kubectl apply -f kubernetes/
                     '''
                 }
             }

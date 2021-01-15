@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: money-tracker-loadbalancer
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: uda.capstone.cwa.money
+spec:
+  type: LoadBalancer
+  selector:
+    app: money-tracker
+  ports:
+    - port: 3000
+      targetPort: 3000
