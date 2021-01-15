@@ -30,7 +30,7 @@ pipeline {
             }
         }
         stage('Final') {
-            agent { agent { label 'master' } }
+            agent { label 'master' }
             steps {
                 script {
                     sh 'ls -al'
