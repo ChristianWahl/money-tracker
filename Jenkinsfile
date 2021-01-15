@@ -78,6 +78,7 @@ pipeline {
             steps {
                 withAWS(region: awsRegion, credentials: clusterCredential) {
                     sh 'aws eks --region $awsRegion update-kubeconfig --name $cluster'
+                    sh 'kubectl config view'
                     sh '''
                         export IMAGE=$registry/$dockerImage:$BUILD_NUMBER
                         sed -ie "s~IMAGE~$IMAGE~g" deploy/kubernetes.yml
@@ -87,9 +88,9 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            cleanWs()
-        }
-    }
+//     post {
+//         always {
+//             cleanWs()
+//         }
+//     }
 }
