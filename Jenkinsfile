@@ -32,8 +32,8 @@ pipeline {
         stage('Final') {
             agent { label 'master' }
             steps {
+                sh 'ls -al'
                 script {
-                    sh 'ls -al'
                     docker.build('demo')
                 }
             }
