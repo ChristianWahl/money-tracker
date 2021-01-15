@@ -29,20 +29,17 @@ pipeline {
                 sh 'CI=true npm run test'
             }
         }
+        stage('Final') {
+            agent { docker { image 'docker:20-dind' } }
+            steps {
+                sh 'ls -al'
+                docker.build('demo')
+            }
+        }
     }
     post {
         always {
             cleanWs()
-        }
-        success {
-            script {
-                if (env.BRANCH_NAME == 'master') {
-                    sh 'echo Promote!'
-                    sh 'ls -al'
-                    docker.build('demo')
-                    currentBuild.result = 'SUCCESS'
-                }
-             }
         }
     }
 }
