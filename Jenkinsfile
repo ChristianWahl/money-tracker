@@ -30,7 +30,7 @@ pipeline {
             }
         }
         stage('Final') {
-            agent { docker { image 'docker:20-dind' } }
+            agent { agent { label 'master' } }
             steps {
                 script {
                     sh 'ls -al'
