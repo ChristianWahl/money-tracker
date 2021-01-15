@@ -33,7 +33,9 @@ pipeline {
             agent { docker { image 'docker:20-dind' } }
             steps {
                 sh 'ls -al'
-                docker.build('demo')
+                script {
+                    docker.build('demo')
+                }
             }
         }
     }
