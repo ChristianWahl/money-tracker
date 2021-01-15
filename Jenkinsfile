@@ -32,8 +32,8 @@ pipeline {
         stage('Final') {
             agent { docker { image 'docker:20-dind' } }
             steps {
-                sh 'ls -al'
                 script {
+                    sh 'ls -al'
                     docker.build('demo')
                 }
             }
