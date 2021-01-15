@@ -1,7 +1,11 @@
 pipeline {
-//     agent { docker { image 'node:15-alpine' } }
-    agent { label 'master' }
+    agent { docker { image 'node:15-alpine' } }
     stages {
+        stage('hello') {
+            steps {
+                sh 'echo hello'
+            }
+        }
 //         stage('Install dependencies') {
 //             environment {
 //                 /*
@@ -34,9 +38,6 @@ pipeline {
             agent { label 'master' }
             steps {
                 sh 'ls -al'
-                script {
-                    docker.build('demo')
-                }
             }
         }
     }
