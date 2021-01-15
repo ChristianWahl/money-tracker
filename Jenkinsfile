@@ -2,7 +2,7 @@ pipeline {
     environment {
         registry = '634819049956.dkr.ecr.eu-central-1.amazonaws.com'
         registryCredential = 'ecr:eu-central-1:jenkins-moneytracker-ecr'
-        dockerImage = 'moneytracker'
+        dockerImage = 'moneytracker-prod'
     }
     agent { label 'docker' }
     stages {
