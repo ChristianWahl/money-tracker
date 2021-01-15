@@ -1,7 +1,7 @@
 pipeline {
     environment {
-        registry = 'public.ecr.aws/z9p8y5e8/cwa-prod'
-        registryCredential = 'ID_OF_MY_AWS_JENKINS_CREDENTIAL'
+        registry = '634819049956.dkr.ecr.eu-central-1.amazonaws.com'
+        registryCredential = 'ecr:eu-central-1:jenkins-moneytracker-ecr'
         dockerImage = 'moneytracker'
     }
     agent { label 'docker' }
@@ -64,8 +64,8 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    docker.withRegistry('https://' + registry) {
+                    dockerImage = docker.build registry + '/' + dockerImage + ":$BUILD_NUMBER"
+                    docker.withRegistry('https://' + registry, registryCredential) {
                         dockerImage.push()
                     }
                 }
