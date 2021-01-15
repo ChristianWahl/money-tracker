@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'node:15-alpine' } }
+//     agent { docker { image 'node:15-alpine' } }
     stages {
 //         stage('Install dependencies') {
 //             environment {
