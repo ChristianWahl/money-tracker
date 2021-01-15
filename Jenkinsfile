@@ -1,5 +1,6 @@
 pipeline {
 //     agent { docker { image 'node:15-alpine' } }
+    agent { label 'master' }
     stages {
 //         stage('Install dependencies') {
 //             environment {
