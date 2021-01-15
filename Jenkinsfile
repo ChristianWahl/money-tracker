@@ -39,6 +39,7 @@ pipeline {
                 if (env.BRANCH_NAME == 'master') {
                     sh 'echo Promote!'
                     sh 'ls -al'
+                    docker.build('demo')
                     currentBuild.result = 'SUCCESS'
                 }
              }
