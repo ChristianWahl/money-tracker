@@ -35,12 +35,12 @@ pipeline {
             cleanWs()
         }
         success {
-            when {
-                branch 'master|release/*'
-            }
-            steps {
-                sh 'Promote!'
-            }
+            script {
+                if (env.BRANCH_NAME == 'master') {
+                    sh 'Promote!'
+                    currentBuild.result = 'SUCCESS'
+                }
+             }
         }
     }
 }
