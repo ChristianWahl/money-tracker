@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker' }
     stages {
         stage('Install dependencies') {
             agent {
@@ -58,7 +58,11 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh 'docker build -t test .'
+                docker.withRegistry('public.ecr.aws/z9p8y5e8/cwa-prod') {
+                    def customImage = docker.build("money-tracker:${env.BUILD_ID}")
+                    /* Push the container to the custom Registry */
+                    customImage.push()
+                }
             }
         }
     }
