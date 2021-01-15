@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker' }
+    agent { label 'master' }
     stages {
         stage('Install dependencies') {
             agent {
@@ -20,17 +20,35 @@ pipeline {
             }
         }
         stage('Lint') {
+            agent {
+                docker {
+                    reuseNode true
+                    image 'node:15-alpine'
+                }
+            }
             steps {
                 sh 'npm run lint'
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    reuseNode true
+                    image 'node:15-alpine'
+                }
+            }
             steps {
                 sh 'npm install typescript react-scripts'
                 sh 'npm run build'
             }
         }
         stage('Test') {
+            agent {
+                docker {
+                    reuseNode true
+                    image 'node:15-alpine'
+                }
+            }
             steps {
                 sh 'CI=true npm run test'
             }
