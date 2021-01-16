@@ -40,22 +40,3 @@
   service:
     name: jenkins
     state: started
-
-- name: Install Docker
-  become: yes
-  apt:
-    name: ["docker.io"]
-    state: latest
-    update_cache: yes
-
-- name: Add user jenkins to docker group
-  user:
-    name: jenkins
-    groups: ["docker"]
-    append: yes
-  become: yes
-
-- name: Reboot
-  become: true
-  reboot:
-    reboot_timeout: 600

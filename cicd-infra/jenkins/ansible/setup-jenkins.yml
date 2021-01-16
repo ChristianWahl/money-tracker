@@ -1,5 +1,5 @@
 ---
-- name: "install Jenkins play."
+- name: "Setup Jenkins build environment play."
   hosts: ec2-jenkins
   user: ubuntu
   gather_facts: false
@@ -10,3 +10,9 @@
 
   roles:
     - install-jenkins
+    - install-docker
+    - install-hadolint
+    - install-awscli
+    - install-eksctl
+    - install-kubectl
+    - reboot

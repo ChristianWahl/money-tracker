@@ -1,0 +1,39 @@
+
+---
+- name: Upgrade packages
+  become: yes
+  apt:
+    upgrade: yes
+
+- name: Remove dependencies that are no longer required
+  become: yes
+  apt:
+    autoremove: yes
+
+- name: Install unzip
+  become: yes
+  apt:
+    name: ["unzip"]
+    state: latest
+    update_cache: yes
+
+- name: Create installation directory
+  file:
+    path: /tmp/aws-installer
+    state: directory
+    mode: '0755'
+
+- name: Download aws cli
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/aws-installer/
+    remote_src: yes
+  become: yes
+
+- name: Install aws cli
+  command: ./install
+  become: yes
+  args:
+    chdir: /tmp/aws-installer/aws/
+
+

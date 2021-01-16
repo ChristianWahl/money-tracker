@@ -1,11 +1,11 @@
 [
   {
     "ParameterKey": "EnvironmentName",
-    "ParameterValue": "Jenkins"
+    "ParameterValue": "YOURENV"
   },
   {
     "ParameterKey": "KeyName",
-    "ParameterValue": "YOURKEY"
+    "ParameterValue": "YOURKEYPAIR"
   },
   {
     "ParameterKey": "InstanceType",

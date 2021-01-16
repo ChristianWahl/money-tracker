@@ -1,0 +1,19 @@
+
+---
+- name: Create installation directory
+  file:
+    path: /tmp/eks-installer
+    state: directory
+    mode: '0755'
+
+- name: Download eksctl
+  unarchive:
+    src: https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_linux_amd64.tar.gz
+    dest: /tmp/eks-installer/
+    remote_src: yes
+
+- name: Install eksctl
+  command: mv /tmp/eks-installer/eksctl /usr/local/bin
+  become: yes
+
+

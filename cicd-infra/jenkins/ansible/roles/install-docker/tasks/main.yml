@@ -1,0 +1,15 @@
+
+---
+- name: Install Docker
+  become: yes
+  apt:
+    name: ["docker.io"]
+    state: latest
+    update_cache: yes
+
+- name: Add user jenkins to Docker group
+  user:
+    name: jenkins
+    groups: ["docker"]
+    append: yes
+  become: yes

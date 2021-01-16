@@ -1,0 +1,7 @@
+
+---
+- name: Install kubectl
+  snap:
+    name: kubectl
+    classic: yes
+  become: yes

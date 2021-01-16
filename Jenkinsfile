@@ -27,7 +27,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Lint') {
+        stage('Lint sources') {
             agent {
                 docker {
                     reuseNode true
@@ -61,6 +61,9 @@ pipeline {
                 sh 'CI=true npm run test'
             }
         }
+        stage('Lint Dockerfile') {
+
+        }
         stage('Build and Publish Image') {
             when {
                 branch 'master'
@@ -74,14 +77,17 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Kubernetes') {
+            when {
+                branch 'master'
+            }
             steps {
                 withAWS(region: awsRegion, credentials: clusterCredential) {
                     sh 'aws eks --region $awsRegion update-kubeconfig --name $cluster'
                     sh '''
                         export IMAGE=$registry/$dockerImage:$BUILD_NUMBER
-                        sed -ie "s~IMAGE~$IMAGE~g" kubernetes/deployment.yml
-                        kubectl apply -f kubernetes/
+                        sed -ie "s~IMAGE~$IMAGE~g" cicd-infra/kubernetes/deployment.yml
+                        kubectl apply -f cicd-infra/kubernetes/
                     '''
                 }
             }
