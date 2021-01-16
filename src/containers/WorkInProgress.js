@@ -6,6 +6,6 @@ export default () => (
     size="large"
     icon="hourglass half"
     header="Work in Progress"
-    content="This page is not ready yet, check back later 😉"
+    content="Hello Udacity 😉"
   />
 );
