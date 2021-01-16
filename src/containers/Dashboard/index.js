@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
               </CollapsibleSection>
             </Grid.Column>
             <Grid.Column computer={10} mobile={16}>
-              <CollapsibleSection name="add_tx" label="New Transaction">
+              <CollapsibleSection name="add_tx" label="New Transaction (Hello Udacity)">
                 <TransactionForm />
               </CollapsibleSection>
               <CollapsibleSection name="recent_tx" label="Recent Transactions">
