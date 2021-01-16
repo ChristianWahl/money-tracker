@@ -49,8 +49,13 @@ ansible-playbook --key-file YOUR-KEYPAIR -i inventory.txt setup-jenkins.yml
 ## 5. Wait
 * Think about the universe and why aliens haven't reached us yet (approx. for 30 minutes).
 
-## 5. Run
+## 6. Run
 * Run the Jenkins job manually.
+* Everything should work. 
+* Login to your Jenkins EC2 one last time and type `kubectl get all`.
+* Copy the load balancer dns name.
+* Open your browser and open the dns name with port 3000.
+* The app should be visible.
 
 ## Work to be done after the pipeline works
 * Add webhooks.

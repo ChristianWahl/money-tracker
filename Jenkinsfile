@@ -62,7 +62,9 @@ pipeline {
             }
         }
         stage('Lint Dockerfile') {
-
+            steps {
+                sh 'make lint-docker'
+            }
         }
         stage('Build and Publish Image') {
             when {
