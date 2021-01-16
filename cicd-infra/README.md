@@ -37,7 +37,7 @@ ansible-playbook --key-file YOUR-KEYPAIR -i inventory.txt setup-jenkins.yml
 * Add **jenkins-moneytracker-eks** and **jenkins-moneytracker-ecr** credentials.
 * Connect the repo to Jenkins (maybe as multibranch).
 
-##4. Create a Kubernetes cluster
+## 4. Create a Kubernetes cluster
 * SSH to your Jenkins EC2 instance.
 * Type `aws configure`.
 * Enter credentials and region for created user: `jenkins-moneytracker-eks`

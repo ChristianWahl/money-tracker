@@ -63,7 +63,7 @@ pipeline {
         }
         stage('Lint Dockerfile') {
             steps {
-                sh 'make lint-docker'
+                sh 'hadolint Dockerfile'
             }
         }
         stage('Build and Publish Image') {
